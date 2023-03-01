@@ -6,15 +6,8 @@ import pandas as pd
 
 import hopsworks
 from geopy.geocoders import Nominatim
-# import os
 from dotenv import load_dotenv
-
 load_dotenv()
-
-# try:
-#     API_KEY = os.environ["HOPSWORKS_API_KEY"]
-# except KeyError:
-#     print("HOPSWORKS_API_KEY is not available!")
 
 
 def convert_date_to_unix(x):
@@ -108,6 +101,7 @@ def get_weather_data(city_name: str,
     res_df["unix_time"] = res_df["base_time"].apply(convert_date_to_unix)
     
     return res_df, some_metadata
+
 
 project = hopsworks.login(project='weather')
 
