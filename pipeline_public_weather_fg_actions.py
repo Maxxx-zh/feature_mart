@@ -110,6 +110,7 @@ def get_weather_data(city_name: str,
 def main():
     # Connect to Hopsworks FS
     print('Retrieving project...')
+    print(API_KEY)
     project = hopsworks.login(project='weather', api_key_value=API_KEY)
     print('Project retrieved')
     fs = project.get_feature_store() 
