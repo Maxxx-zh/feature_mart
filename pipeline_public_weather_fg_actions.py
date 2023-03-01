@@ -74,7 +74,6 @@ def get_weather_data(city_name: str,
     some_metadata = {key: response_json[key] for key in ('latitude', 'longitude',
                                                          'timezone', 'hourly_units')}
     
-    
     res_df = pd.DataFrame(response_json["hourly"])
     
     res_df["forecast_hr"] = 0
@@ -110,13 +109,14 @@ def get_weather_data(city_name: str,
 
 def main():
     # Connect to Hopsworks FS
-    project = hopsworks.login(project='weather')
+    project = hopsworks.login(project='weather', api_key_value=API_KEY)
     fs = project.get_feature_store() 
 
     weather_fg = fs.get_or_create_feature_group(
         name='weather_data',
         version=1
     )
+    print('Retrieved Weather FG')
         
     city_names = [
         'Kyiv',
