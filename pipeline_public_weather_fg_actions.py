@@ -114,7 +114,7 @@ def main():
     # Connect to Hopsworks FS
     print('Retrieving project...')
     print(API_KEY)
-    project = hopsworks.login(project='weather', api_key_value=API_KEY)
+    project = hopsworks.login(project='weather')
     print('Project retrieved')
     fs = project.get_feature_store() 
     print('FS retrieved')
