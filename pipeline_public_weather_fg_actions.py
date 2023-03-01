@@ -159,6 +159,4 @@ def main():
     
     weather_fg.insert(forecast_batch, write_options={"wait_for_job": False})
 
-
-if __name__ == "__main__":
-    main()
+main()
