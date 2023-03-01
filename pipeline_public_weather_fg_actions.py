@@ -6,12 +6,15 @@ import pandas as pd
 
 import hopsworks
 from geopy.geocoders import Nominatim
-import os
+# import os
+from dotenv import load_dotenv
 
-try:
-    API_KEY = os.environ["HOPSWORKS_API_KEY"]
-except KeyError:
-    print("HOPSWORKS_API_KEY is not available!")
+load_dotenv()
+
+# try:
+#     API_KEY = os.environ["HOPSWORKS_API_KEY"]
+# except KeyError:
+#     print("HOPSWORKS_API_KEY is not available!")
 
 
 def convert_date_to_unix(x):
