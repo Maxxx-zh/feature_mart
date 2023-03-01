@@ -109,6 +109,16 @@ def get_weather_data(city_name: str,
     
     return res_df, some_metadata
 
+print('Retrieving project...')
+project = hopsworks.login(project='weather')
+print('Done project...')
+fs = project.get_feature_store() 
+print('FS DONE...')
+weather_fg = fs.get_or_create_feature_group(
+        name='weather_data',
+        version=1
+    )
+
 
 def main():
     # Connect to Hopsworks FS
@@ -161,4 +171,4 @@ def main():
     
     weather_fg.insert(forecast_batch, write_options={"wait_for_job": False})
 
-main()
+#main()
