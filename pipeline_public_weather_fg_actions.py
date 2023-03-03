@@ -161,6 +161,7 @@ print('Data is ready 📈')
 
 print(observations_batch.head())
 
+print(weather_fg.name)
 #weather_fg.insert(observations_batch, write_options={"wait_for_job": False})
-weather_fg.insert(forecast_batch, write_options={"wait_for_job": False})
+#weather_fg.insert(forecast_batch, write_options={"wait_for_job": False})
 print('Insertion is ready 📈') 
