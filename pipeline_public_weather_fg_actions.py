@@ -103,7 +103,7 @@ def get_weather_data(city_name: str,
     return res_df, some_metadata
 
 
-def insert_data(weather_fg):
+def data_preparation(weather_fg):
 
     # Define required cities
     city_names = [
@@ -132,8 +132,6 @@ def insert_data(weather_fg):
                                                             start_date=day7ago, end_date=day7ago)
         observations_batch = pd.concat([observations_batch, weather_df_temp])
         
-    weather_fg.insert(observations_batch, write_options={"wait_for_job": False})
-
     # Parse and insert new data from forecast endpoint for new day in future
     forecast_batch = pd.DataFrame()
 
@@ -142,7 +140,7 @@ def insert_data(weather_fg):
                                                             start_date=day7next, end_date=day7next)
         forecast_batch = pd.concat([forecast_batch, weather_df_temp])
 
-    weather_fg.insert(forecast_batch, write_options={"wait_for_job": False})
+    return observations_batch, forecast_batch
     
 
 project = hopsworks.login(project='weather')
@@ -157,6 +155,9 @@ weather_fg = fs.get_or_create_feature_group(
     )
 print('FG is ready 📈')     
    
-insert_data(weather_fg)
-print('Insertion is ready 📈') 
+observations_batch, forecast_batch = data_preparation(weather_fg)
+print('Data is ready 📈') 
 
+weather_fg.insert(observations_batch, write_options={"wait_for_job": False})
+weather_fg.insert(forecast_batch, write_options={"wait_for_job": False})
+print('Insertion is ready 📈') 
