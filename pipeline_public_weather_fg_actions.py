@@ -10,6 +10,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+project = hopsworks.login(project='weather')
+print('Login is ready 📈')
+
+fs = project.get_feature_store() 
+print('FS is ready 📈')
+
+
 def convert_date_to_unix(x):
     """
     Convert datetime to unix time in milliseconds.
@@ -142,13 +149,7 @@ def data_preparation(weather_fg):
 
     return observations_batch, forecast_batch
     
-
-project = hopsworks.login(project='weather')
-print('Login is ready 📈')
-
-fs = project.get_feature_store() 
-print('FS is ready 📈')
-
+    
 weather_fg = fs.get_or_create_feature_group(
         name='weather_data',
         version=1
