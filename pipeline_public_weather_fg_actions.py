@@ -155,10 +155,13 @@ weather_fg = fs.get_or_create_feature_group(
         name='weather_data',
         version=1
     )
-print('FG is ready 📈')     
-   
-observations_batch, forecast_batch = data_preparation(weather_fg)
-print('Data is ready 📈') 
+print('FG is ready 📈')  
+
+print(weather_fg.name)
+
+
+# observations_batch, forecast_batch = data_preparation(weather_fg)
+# print('Data is ready 📈') 
 
 #weather_fg.insert(observations_batch, write_options={"wait_for_job": False})
 #weather_fg.insert(forecast_batch, write_options={"wait_for_job": False})
