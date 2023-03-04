@@ -6,6 +6,7 @@ import pandas as pd
 
 import hopsworks
 from geopy.geocoders import Nominatim
+
 from dotenv import load_dotenv
 load_dotenv()
 
