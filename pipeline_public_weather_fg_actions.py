@@ -160,8 +160,8 @@ print('FG is ready 📈')
 print(weather_fg.name)
 
 
-# observations_batch, forecast_batch = data_preparation(weather_fg)
-# print('Data is ready 📈') 
+observations_batch, forecast_batch = data_preparation(weather_fg)
+print('Data is ready 📈') 
 
 #weather_fg.insert(observations_batch, write_options={"wait_for_job": False})
 #weather_fg.insert(forecast_batch, write_options={"wait_for_job": False})
