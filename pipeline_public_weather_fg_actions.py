@@ -158,7 +158,7 @@ if __name__ == '__main__':
             version=1
         )
     print('weather_fg Connected')
-    # observations_batch, forecast_batch = data_preparation()
-    # print('Super Done!')
+    observations_batch, forecast_batch = data_preparation()
+    print('Super Done!')
     # weather_fg.insert(observations_batch, write_options={"wait_for_job": False})
     # weather_fg.insert(forecast_batch, write_options={"wait_for_job": False})
