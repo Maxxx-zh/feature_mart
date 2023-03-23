@@ -1,7 +1,3 @@
-from dotenv import load_dotenv
-load_dotenv()
-
-
 def convert_date_to_unix(x):
     """
     Convert datetime to unix time in milliseconds.
@@ -96,14 +92,6 @@ def get_weather_data(city_name: str,
 
 
 def data_preparation():
-    # Imports
-    import requests
-    import datetime
-
-    import pandas as pd
-
-    from geopy.geocoders import Nominatim
-
     # Define required cities
     city_names = [
         'Kyiv',
@@ -148,6 +136,16 @@ def data_preparation():
 
 if __name__ == '__main__':
     import hopsworks
+    # Imports
+    import requests
+    import datetime
+
+    import pandas as pd
+
+    from geopy.geocoders import Nominatim
+    from dotenv import load_dotenv
+    load_dotenv()
+    
 
     print('Running')
     project = hopsworks.login(project='weather')
