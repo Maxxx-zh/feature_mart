@@ -5,7 +5,7 @@ import datetime
 
 import pandas as pd
 
-#from geopy.geocoders import Nominatim
+from geopy.geocoders import Nominatim
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -145,6 +145,7 @@ def data_preparation():
 
     print('Done')
     return observations_batch, forecast_batch
+
 
 if __name__ == '__main__':
 
