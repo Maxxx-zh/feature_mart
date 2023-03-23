@@ -145,17 +145,17 @@ if __name__ == '__main__':
     from geopy.geocoders import Nominatim
     from dotenv import load_dotenv
     load_dotenv()
-    
 
-    print('Running')
-    project = hopsworks.login(project='weather')
-    print('Connected')
-    fs = project.get_feature_store() 
-    print('FS Connected')
-    weather_fg = fs.get_or_create_feature_group(
-            name='weather_data',
-            version=1
-        )
+
+    # print('Running')
+    # project = hopsworks.login(project='weather')
+    # print('Connected')
+    # fs = project.get_feature_store() 
+    # print('FS Connected')
+    # weather_fg = fs.get_or_create_feature_group(
+    #         name='weather_data',
+    #         version=1
+    #     )
     print('weather_fg Connected')
     observations_batch, forecast_batch = data_preparation()
     print('Super Done!')
