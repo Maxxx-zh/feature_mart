@@ -5,7 +5,7 @@ import datetime
 
 import pandas as pd
 
-from geopy.geocoders import Nominatim
+#from geopy.geocoders import Nominatim
 from dotenv import load_dotenv
 load_dotenv()
 
