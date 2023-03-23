@@ -150,14 +150,14 @@ def data_preparation():
 if __name__ == '__main__':
     print('Running')
     project = hopsworks.login(project='weather')
-
-    # fs = project.get_feature_store() 
-    
-    # weather_fg = fs.get_or_create_feature_group(
-    #         name='weather_data',
-    #         version=1
-    #     )
-
+    print('Connected')
+    fs = project.get_feature_store() 
+    print('FS Connected')
+    weather_fg = fs.get_or_create_feature_group(
+            name='weather_data',
+            version=1
+        )
+    print('weather_fg Connected')
     # observations_batch, forecast_batch = data_preparation()
     # print('Super Done!')
     # weather_fg.insert(observations_batch, write_options={"wait_for_job": False})
