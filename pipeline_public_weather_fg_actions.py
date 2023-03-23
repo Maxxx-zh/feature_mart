@@ -148,16 +148,17 @@ def data_preparation():
     return observations_batch, forecast_batch
 
 if __name__ == '__main__':
-    project = hopsworks.login(project='weather')
+    print('Running')
+    # project = hopsworks.login(project='weather')
 
-    fs = project.get_feature_store() 
+    # fs = project.get_feature_store() 
     
-    weather_fg = fs.get_or_create_feature_group(
-            name='weather_data',
-            version=1
-        )
+    # weather_fg = fs.get_or_create_feature_group(
+    #         name='weather_data',
+    #         version=1
+    #     )
 
-    observations_batch, forecast_batch = data_preparation()
-    print('Super Done!')
-    weather_fg.insert(observations_batch, write_options={"wait_for_job": False})
-    weather_fg.insert(forecast_batch, write_options={"wait_for_job": False})
+    # observations_batch, forecast_batch = data_preparation()
+    # print('Super Done!')
+    # weather_fg.insert(observations_batch, write_options={"wait_for_job": False})
+    # weather_fg.insert(forecast_batch, write_options={"wait_for_job": False})
