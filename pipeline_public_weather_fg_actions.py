@@ -1,12 +1,3 @@
-# Imports
-import requests
-import datetime
-
-import pandas as pd
-
-import hopsworks
-from geopy.geocoders import Nominatim
-
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -105,6 +96,14 @@ def get_weather_data(city_name: str,
 
 
 def data_preparation():
+    # Imports
+    import requests
+    import datetime
+
+    import pandas as pd
+
+    from geopy.geocoders import Nominatim
+
     # Define required cities
     city_names = [
         'Kyiv',
@@ -148,6 +147,8 @@ def data_preparation():
     return observations_batch, forecast_batch
 
 if __name__ == '__main__':
+    import hopsworks
+
     print('Running')
     project = hopsworks.login(project='weather')
     print('Connected')
