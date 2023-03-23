@@ -149,7 +149,7 @@ def data_preparation():
 
 if __name__ == '__main__':
     print('Running')
-    # project = hopsworks.login(project='weather')
+    project = hopsworks.login(project='weather')
 
     # fs = project.get_feature_store() 
     
