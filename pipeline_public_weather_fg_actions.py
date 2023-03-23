@@ -135,7 +135,7 @@ def data_preparation():
     return observations_batch, forecast_batch
 
 if __name__ == '__main__':
-    import hopsworks
+    #import hopsworks
     # Imports
     import requests
     import datetime
