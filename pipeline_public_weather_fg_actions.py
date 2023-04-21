@@ -1,13 +1,10 @@
-#import hopsworks
 import requests
 import datetime
 import time
 import pandas as pd
 
-# from dotenv import load_dotenv
-# load_dotenv()
 
-
+print('Hello World')
 def convert_date_to_unix(x):
     """
     Convert datetime to unix time in milliseconds.
@@ -64,9 +61,6 @@ def get_weather_data(city_name: str,
     response = requests.get(base_url, params=params)
 
     response_json = response.json()
-
-    metadata = {key: response_json[key] for key in ('latitude', 'longitude',
-                                                         'timezone', 'hourly_units')}
     
     res_df = pd.DataFrame(response_json["hourly"])
     
@@ -75,7 +69,6 @@ def get_weather_data(city_name: str,
     if forecast:
         res_df["forecast_hr"] = res_df.index
     
-    metadata["city_name"] = city_name
     res_df["city_name"] = city_name
     
     # rename columns
@@ -98,7 +91,7 @@ def get_weather_data(city_name: str,
     # create 'unix' columns
     res_df["unix_time"] = res_df["base_time"].apply(convert_date_to_unix)
     
-    return res_df, metadata
+    return res_df
 
 
 def data_preparation():
@@ -127,7 +120,7 @@ def data_preparation():
     # Parse and insert updated data from observations endpoint
     observations_batch = pd.DataFrame()
     for city_name in city_names:
-        weather_df_temp, metadata_temp = get_weather_data(city_name, forecast=False,
+        weather_df_temp = get_weather_data(city_name, forecast=False,
                                                             start_date=day7ago, end_date=day7ago)
         observations_batch = pd.concat([observations_batch, weather_df_temp])
         print('Wait 5 sec...')
@@ -151,21 +144,3 @@ def data_preparation():
 print('Parsing Start')
 observations_batch, forecast_batch = data_preparation()
 print('Super Done!')
-
-#if __name__ == '__main__':
-
-    # print('Running')
-    # project = hopsworks.login(project='weather')
-    # print('Connected')
-    # fs = project.get_feature_store() 
-    # print('FS Connected')
-    # weather_fg = fs.get_or_create_feature_group(
-    #         name='weather_data',
-    #         version=1
-    #     )
-    #print('weather_fg Connected')
-    # print('Parsing Start')
-    # observations_batch, forecast_batch = data_preparation()
-    # print('Super Done!')
-    # weather_fg.insert(observations_batch, write_options={"wait_for_job": False})
-    # weather_fg.insert(forecast_batch, write_options={"wait_for_job": False})
