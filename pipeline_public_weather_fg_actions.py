@@ -22,6 +22,7 @@ def get_city_coordinates(city_name: str):
     Takes city name and returns its latitude and longitude (rounded to 2 digits after dot).
     """    
     # Initialize Nominatim API (for getting lat and long of the city)
+    print(f'Retrieving city coordinates {city_name}')
     geolocator = Nominatim(user_agent="MyApp")
     city = geolocator.geocode(city_name)
 
@@ -131,6 +132,7 @@ def data_preparation():
                                                             start_date=day7ago, end_date=day7ago)
         observations_batch = pd.concat([observations_batch, weather_df_temp])
         time.sleep(5)
+        print(f'Parsed for {city_name}')
 
         
     print('forecast_batch in progress')
