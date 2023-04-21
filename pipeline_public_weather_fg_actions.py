@@ -1,11 +1,11 @@
-import hopsworks
+#import hopsworks
 import requests
 import datetime
 import time
 import pandas as pd
 
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 
 def convert_date_to_unix(x):

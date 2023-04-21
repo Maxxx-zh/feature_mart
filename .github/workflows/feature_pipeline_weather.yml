@@ -2,9 +2,9 @@ name: feature_pipeline
 
 on:
   workflow_dispatch:
-#  push:
-#    branches:
-#      - 'master'
+  push:
+    branches:
+      - 'FSTORE-686'
   schedule:
     - cron: '0 0 * * *' # Runs every day at midnight
 
@@ -18,7 +18,7 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v3
         with:
-          python-version: '3.9.13'
+          python-version: '3.8.9'
           
       - name: install python packages
         run: |
@@ -28,4 +28,4 @@ jobs:
       - name: execute Feature Pipeline
         env: 
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
-        run: python ./pipeline_public_weather_fg_actions.py
+        run: python pipeline_public_weather_fg_actions.py
