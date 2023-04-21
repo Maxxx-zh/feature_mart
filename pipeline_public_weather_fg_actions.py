@@ -3,7 +3,7 @@ import requests
 import datetime
 import time
 import pandas as pd
-from geopy.geocoders import Nominatim
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -17,21 +17,6 @@ def convert_date_to_unix(x):
     return dt_obj
 
 
-def get_city_coordinates(city_name: str):
-    """
-    Takes city name and returns its latitude and longitude (rounded to 2 digits after dot).
-    """    
-    # Initialize Nominatim API (for getting lat and long of the city)
-    print(f'Retrieving city coordinates {city_name}')
-    geolocator = Nominatim(user_agent="MyApp")
-    city = geolocator.geocode(city_name)
-
-    latitude = round(city.latitude, 2)
-    longitude = round(city.longitude, 2)
-    
-    return latitude, longitude
-
-
 def get_weather_data(city_name: str,
                      start_date: str = None,
                      end_date: str = None,
@@ -43,8 +28,22 @@ def get_weather_data(city_name: str,
     
     If forecast=True - returns 7 days forecast data by default (without specifying daterange).
     """
+
+    city_names = {
+        'Kyiv': [50.45, 30.52],
+        'London': [51.51, -0.13],
+        'Paris': [48.85, 2.35],
+        'Stockholm': [59.33, 18.07],
+        'New_York': [40.71, -74.01],
+        'Los_Angeles': [34.05, -118.24],
+        'Singapore': [1.36, 103.82],
+        'Sydney': [-33.87, 151.21],
+        'Hong_Kong': [22.28, 114.16],
+        'Rome': [41.89, 12.48],
+    }
     
-    latitude, longitude = get_city_coordinates(city_name=city_name)
+    latitude, longitude = city_names[city_name]
+    print(latitude, longitude)
     
     params = {
         'latitude': latitude,
@@ -131,6 +130,7 @@ def data_preparation():
         weather_df_temp, metadata_temp = get_weather_data(city_name, forecast=False,
                                                             start_date=day7ago, end_date=day7ago)
         observations_batch = pd.concat([observations_batch, weather_df_temp])
+        print('Wait 5 sec...')
         time.sleep(5)
         print(f'Parsed for {city_name}')
 
