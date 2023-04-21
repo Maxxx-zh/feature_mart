@@ -1,10 +1,8 @@
-#import hopsworks
-# Imports
+import hopsworks
 import requests
 import datetime
-
+import time
 import pandas as pd
-
 from geopy.geocoders import Nominatim
 from dotenv import load_dotenv
 load_dotenv()
@@ -67,7 +65,7 @@ def get_weather_data(city_name: str,
 
     response_json = response.json()
 
-    some_metadata = {key: response_json[key] for key in ('latitude', 'longitude',
+    metadata = {key: response_json[key] for key in ('latitude', 'longitude',
                                                          'timezone', 'hourly_units')}
     
     res_df = pd.DataFrame(response_json["hourly"])
@@ -77,7 +75,7 @@ def get_weather_data(city_name: str,
     if forecast:
         res_df["forecast_hr"] = res_df.index
     
-    some_metadata["city_name"] = city_name
+    metadata["city_name"] = city_name
     res_df["city_name"] = city_name
     
     # rename columns
@@ -100,7 +98,7 @@ def get_weather_data(city_name: str,
     # create 'unix' columns
     res_df["unix_time"] = res_df["base_time"].apply(convert_date_to_unix)
     
-    return res_df, some_metadata
+    return res_df, metadata
 
 
 def data_preparation():
@@ -132,6 +130,8 @@ def data_preparation():
         weather_df_temp, metadata_temp = get_weather_data(city_name, forecast=False,
                                                             start_date=day7ago, end_date=day7ago)
         observations_batch = pd.concat([observations_batch, weather_df_temp])
+        time.sleep(5)
+
         
     print('forecast_batch in progress')
 
@@ -158,7 +158,8 @@ if __name__ == '__main__':
     #         name='weather_data',
     #         version=1
     #     )
-    print('weather_fg Connected')
+    #print('weather_fg Connected')
+    print('Parsing Start')
     observations_batch, forecast_batch = data_preparation()
     print('Super Done!')
     # weather_fg.insert(observations_batch, write_options={"wait_for_job": False})
