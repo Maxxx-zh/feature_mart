@@ -148,8 +148,11 @@ def data_preparation():
     print('Done')
     return observations_batch, forecast_batch
 
+print('Parsing Start')
+observations_batch, forecast_batch = data_preparation()
+print('Super Done!')
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
 
     # print('Running')
     # project = hopsworks.login(project='weather')
@@ -161,8 +164,8 @@ if __name__ == '__main__':
     #         version=1
     #     )
     #print('weather_fg Connected')
-    print('Parsing Start')
-    observations_batch, forecast_batch = data_preparation()
-    print('Super Done!')
+    # print('Parsing Start')
+    # observations_batch, forecast_batch = data_preparation()
+    # print('Super Done!')
     # weather_fg.insert(observations_batch, write_options={"wait_for_job": False})
     # weather_fg.insert(forecast_batch, write_options={"wait_for_job": False})
